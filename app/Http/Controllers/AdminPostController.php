@@ -80,6 +80,10 @@ class AdminPostController extends Controller
         //
     }
 
+    public function post($id){
+        $post  = Post::findOrFail($is)
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

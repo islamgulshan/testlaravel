@@ -29,16 +29,15 @@ Route::get('/admin', function (){
 });
 
 
+Route::get('/post/{id}', 'AdminPostController@post'); 
+
+
 Route::group(['middleware'=>'admin'], function (){
-
 	Route::resource('/admin/user', 'AdminUsersController');
-
-	Route::resource('/admin/posts', 'AdminPostController');
-	
+	Route::resource('/admin/posts', 'AdminPostController');	
 	Route::resource('/admin/media', 'MediaController');
-
-
-
+	Route::resource('/admin/comments', 'CommentsController');
+	Route::resource('/admin/Comment/reply', 'CommentsReplyController'); 
 	Route::resource('/admin/Categoires', 'CategoiresController');
 
 
