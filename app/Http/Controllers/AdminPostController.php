@@ -6,6 +6,7 @@ use App\Post;
 use App\Photo;
 use App\Category;
 use Auth;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreatePostRequests;
 
 class AdminPostController extends Controller
@@ -81,7 +82,8 @@ class AdminPostController extends Controller
     }
 
     public function post($id){
-        $post  = Post::findOrFail($is)
+        $post  = Post::findOrFail($id);
+        return view('post', compact('post'));
     }
 
     /**

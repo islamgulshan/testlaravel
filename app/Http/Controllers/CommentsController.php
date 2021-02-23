@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use App\Comment;
+use Illuminate\Support\Facades\Session;
 class CommentsController extends Controller
 {
     /**
@@ -36,6 +38,24 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user = Auth::user();
+        $data = [
+
+                'post_id'=>$request->post_id,
+                'auther'=>$user->name,
+                'email'=>$user->email,
+                'body'=>$request->body,
+               
+
+        ];
+
+        Comment::create($data);
+
+        $request->session()->flash('comments','submited SuccessFully');
+
+        return redirect()->back();
+
         //
     }
 
