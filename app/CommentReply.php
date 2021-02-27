@@ -11,6 +11,7 @@ class CommentReply extends Model
         'comment_id',
         'is_active', 
         'auther',
+        'photo',
         'email',
         'body',
 

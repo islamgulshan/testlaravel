@@ -3,7 +3,7 @@
 @section('content') 
 
 
-@if(count($comments)>0)
+@if($comments)
 
 <h2>Comments</h2>
 
@@ -22,8 +22,8 @@
     
     <tbody>
     
-
-  	@foreach($comments as $comment)
+    	@foreach($comments as $comment)
+  	
   		<tr>
 	        <td>{{$comment->id}}</td>
 	        <td>{{$comment->auther}}</td>
@@ -72,9 +72,8 @@
 				 {!! Form::close()  !!}</td>
 
 
-      	</tr>      
-	@endforeach
-	
+      	</tr>   
+		@endforeach
 	</tbody>	
 
 </table>

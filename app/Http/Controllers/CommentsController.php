@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Comment;
+use App\Post;
 use Illuminate\Support\Facades\Session;
 class CommentsController extends Controller
 {
@@ -15,8 +16,8 @@ class CommentsController extends Controller
      */
     public function index()
     {
-
-        return view('admin.comments.index');
+        $comments  = Comment::all();
+        return view('admin.comments.index', compact('comments'));
         //
     }
 
@@ -40,11 +41,13 @@ class CommentsController extends Controller
     {
 
         $user = Auth::user();
+//        return $user;
         $data = [
 
                 'post_id'=>$request->post_id,
                 'auther'=>$user->name,
                 'email'=>$user->email,
+                'photo'=>$user->photo->file,
                 'body'=>$request->body,
                
 
@@ -67,6 +70,11 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
+
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+
+        return view('admin.comments.show',compact('comments'));
         //
     }
 
@@ -90,6 +98,9 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Comment::findOrFail($id)->update($request->all());
+
+        return redirect()->back();
         //
     }
 
@@ -101,6 +112,9 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
+        Comment::findOrFail($id)->delete();
+        return redirect()->back();
+
         //
     }
 }

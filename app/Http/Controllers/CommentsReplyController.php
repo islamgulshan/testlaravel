@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use App\CommentReply;
+
 class CommentsReplyController extends Controller
 {
     /**
@@ -36,6 +39,39 @@ class CommentsReplyController extends Controller
     {
         //
     }
+
+
+    /**
+     * create Reply created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createReply(Request $request)
+    {
+        $user = Auth::user();
+//        return $user;
+        $data = [
+
+                'comment_id'=>$request->comment_id,
+                'auther'=>$user->name,
+                'email'=>$user->email,
+                'photo'=>$user->photo->file,
+                'body'=>$request->body,
+               
+
+        ];
+
+        CommentReply::create($data);
+
+        $request->session()->flash('CommentReply','submited SuccessFully');
+
+        return redirect()->back();
+        //
+    }
+
+
+    
 
     /**
      * Display the specified resource.

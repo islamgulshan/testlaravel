@@ -10,7 +10,8 @@
       <th>Id</th>
       <th>Photo</th>
       <th>Title</th>
-      <th>body</th>
+      <th>Comments</th>
+
       
       <th>Category</th>
       <th>User</th>
@@ -28,7 +29,8 @@
 	        <td>{{$post->id}}</td>
 	        <td><img src="{{url($post->photo? $post->photo->file:'Not Active')}}" height="50"></td>
 	        <td><a href="{{route('posts.edit',$post->id)}}">{{$post->title}}</a></td>
-	        <td>{{ $post->body}}</td>
+	        <td><a href="{{route('comments.show',$post->id)}}">View Comments</a></td>
+	        <td><a href="{{route('home.post',$post->id)}}">View Post</a></td>
 	        <td>{{$post->category? $post->category->name:'Uncategories'}}</td>
 	        <td>{{$post->user->name}}</td>
 	        <td>{{$post->created_at->diffForHumans()}}</td>
